@@ -22,9 +22,9 @@ namespace Pokedex_API.Controllers
         }
 
         [HttpGet("{type}")]
-        public async Task<ActionResult<List<Pokemon>>> GetPokemonsByType(Type type)
+        public async Task<ActionResult<List<Pokemon>>> GetPokemonsByType(PokemonType type)
         {
-            return null;
+            return Ok(await _pokemonRepository.GetPokemonsByType(type));
         }
 
         [HttpGet("{id}")]
