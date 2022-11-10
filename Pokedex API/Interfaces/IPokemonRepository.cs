@@ -2,18 +2,8 @@
 
 namespace Pokedex_API.Interfaces
 {
-    public interface IPokemonRepository
+    public interface IPokemonRepository : IBaseRepository<Pokemon>
     {
-        Task<List<Pokemon>> GetAllPokemons();
-
-        Task<List<Pokemon>> GetPokemonsByType(PokemonType type);
-
-        Task<Pokemon> GetPokemon(int id);
-
-        Task<Pokemon> Add(Pokemon pokemon);
-
-        Task<Pokemon> Update(int id, Pokemon pokemon);
-
-        Task Delete(int id);
+        Task<List<Pokemon>> GetByType(PokemonType type);
     }
 }
