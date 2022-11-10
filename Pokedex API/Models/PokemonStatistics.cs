@@ -1,6 +1,6 @@
 ﻿namespace Pokedex_API.Models
 {
-    public class PokemonStatistics
+    public class PokemonStatistics : BaseEntity
     {
         public int HP { get; set; }
         public int Attack { get; set; }
