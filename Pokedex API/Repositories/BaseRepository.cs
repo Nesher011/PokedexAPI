@@ -2,23 +2,30 @@
 using Microsoft.EntityFrameworkCore;
 using Pokedex_API.Database;
 using Pokedex_API.Models;
+using Pokedex_API.Dtos;
 
 namespace Pokedex_API.Repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public class BaseRepository<T, TDto> : IBaseRepository<T, TDto> where T : BaseEntity, new() where TDto:BaseDto
     {
         private readonly PokedexContext _dbContext;
+        private DbSet<T> table;
 
         public BaseRepository(PokedexContext dbContext)
         {
             _dbContext = dbContext;
+
+            table = _dbContext.Set<T>;
         }
 
-        public async Task<T> Create(T entity)
+        public async Task<T> Create(TDto entityDto)
         {
+            var entityFromDb = new T();
+
             if (entity == null)
                 throw new NotImplementedException();
 
+            var entityFromDb = await table.FirstOrDefaultAsync(e => e.Id == entityDto.Id);
             await _dbContext.SaveChangesAsync();
 
             throw new NotImplementedException();
