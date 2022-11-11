@@ -2,18 +2,16 @@
 
 namespace Pokedex_API.Interfaces
 {
-    public interface IBaseRepository<T> where T : class
+    public interface IBaseRepository<T, TDto> where T : class
     {
-        Task<List<T>> GetAll();
+        Task<List<TDto>> GetAll();
 
-        Task<T> Create(T entity);
+        Task<TDto> Create(TDto tDto);
 
-        Task<T> Update(T entity);
+        Task<TDto> Update(TDto tDto);
 
-        Task<T> GetById(Guid guid);
+        Task<TDto> GetById(Guid guid);
 
         Task Delete(Guid guid);
-
-        Task<T> GetById(int id);
     }
 }
