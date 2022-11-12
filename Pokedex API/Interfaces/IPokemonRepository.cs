@@ -1,9 +1,10 @@
-﻿using Pokedex_API.Models;
+﻿using Pokedex_API.Dtos;
+using Pokedex_API.Models;
 
 namespace Pokedex_API.Interfaces
 {
-    public interface IPokemonRepository : IBaseRepository<Pokemon>
+    public interface IPokemonRepository : IBaseRepository<Pokemon, PokemonDto>
     {
-        Task<List<Pokemon>> GetByType(PokemonType type);
+        Task<List<PokemonDto>> GetByType(PokemonType type);
     }
 }
