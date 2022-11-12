@@ -14,9 +14,10 @@ namespace Pokedex_API.Repositories
 
         private DbSet<T> table;
 
-        public BaseRepository(PokedexContext dbContext)
+        public BaseRepository(PokedexContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
 
             table = _dbContext.Set<T>();
         }
@@ -52,9 +53,17 @@ namespace Pokedex_API.Repositories
             return _mapper.Map<TDto>(await table.FirstOrDefaultAsync(e => e.Id == id));
         }
 
-        public Task<TDto> Update(TDto entityDto)
+        public async Task<TDto> Update(TDto entityDto)
         {            
-            throw new NotImplementedException();
+            if (entityDto==null)
+                throw new NotImplementedException();
+
+            var entity= await table.FirstOrDefaultAsync(e=>e.Id==entityDto.Id);
+
+            _mapper.Map(entityDto,entity);
+            await _dbContext.SaveChangesAsync();
+
+            return _mapper.Map<TDto>(entity);
         }
 
     }
