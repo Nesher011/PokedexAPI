@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Pokedex_API.Dtos;
 using Pokedex_API.Interfaces;
 using Pokedex_API.Models;
 
@@ -16,35 +17,37 @@ namespace Pokedex_API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Pokemon>>> GetAllPokemons()
+        public async Task<ActionResult<List<Pokemon>>> GetAll()
         {
             return Ok(await _pokemonRepository.GetAll());
         }
 
         [HttpGet("{type}")]
-        public async Task<ActionResult<List<Pokemon>>> GetPokemonsByType(PokemonType type)
+        public async Task<ActionResult<List<Pokemon>>> GetByType(PokemonType type)
         {
             return Ok(await _pokemonRepository.GetByType(type));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Pokemon>>> GetPokemon(int id)
+        public async Task<ActionResult<List<Pokemon>>> GetById(Guid id)
         {
-            return await _pokemonRepository.GetById(id) is Pokemon p ? Ok(p) : NotFound();
+            return await _pokemonRepository.GetById(id) is PokemonDto p ? Ok(p) : NotFound();
         }
 
         [HttpPost]
-        public async Task<ActionResult<Pokemon>> Add(Pokemon pokemon)
+        public async Task<ActionResult<Pokemon>> Create(PokemonDto pokemonDto)
         {
-            await _pokemonRepository.Create(pokemon);
+            var pokemon= await _pokemonRepository.Create(pokemonDto);
+            if (pokemon == null)
+                throw new NotImplementedException();
 
             return Ok(pokemon);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Pokemon>> Update(int id, Pokemon pokemon)
+        public async Task<ActionResult<Pokemon>> Update(PokemonDto pokemonDto)
         {
-            await _pokemonRepository.Update(pokemon);
+            var pokemon = await _pokemonRepository.Update(pokemonDto);
 
             return Ok(pokemon);
         }
