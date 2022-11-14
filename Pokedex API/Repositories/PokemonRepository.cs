@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Pokedex_API.Database;
 using Pokedex_API.Dtos;
 using Pokedex_API.Interfaces;
@@ -19,9 +20,9 @@ namespace Pokedex_API.Repositories
 
         public async Task<List<PokemonDto>> GetByType(PokemonType type)
         {
-            return _mapper.Map<List<PokemonDto>>(_dbContext.Pokemons
+            return _mapper.Map<List<PokemonDto>>(await _dbContext.Pokemons
                 .Where(pokemon => (pokemon.PrimaryType == type || pokemon.SecondaryType == type))
-                .ToList());
+                .ToListAsync());
         }
     }
 }
