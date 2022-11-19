@@ -3,9 +3,9 @@
     public class PokemonType : BaseEntity
     {
         public string Name { get; set; } = string.Empty;
-        public List<PokemonType> Strenghts { get; set; } = new List<PokemonType>();
-        public List<PokemonType> Weaknesses { get; set; } = new List<PokemonType>();
-        public List<PokemonType>? NoEffectOn { get; set; }
-        public List<PokemonType>? NoEffectFrom { get; set; }
+        public List<string> Strenghts { get; set; } = new List<string>();
+        public List<string> Weaknesses { get; set; } = new List<string>();
+        public List<string>? NoEffectOn { get; set; }
+        public List<string>? NoEffectFrom { get; set; }
     }
 }
