@@ -2,7 +2,7 @@
 
 namespace Pokedex_API.Dtos
 {
-    public class PokemonDto:BaseDto
+    public class PokemonDto : BaseDto
     {
         public string Name { get; set; } = string.Empty;
         public float Height { get; set; }
@@ -10,7 +10,7 @@ namespace Pokedex_API.Dtos
         public string Description { get; set; } = string.Empty;
         public PokemonType PrimaryType { get; set; } = new PokemonType();
         public PokemonType? SecondaryType { get; set; }
-        public List<PokemonType> Weaknesses { get; set; } = new List<PokemonType>();
+        public List<string> Weaknesses { get; set; } = new List<string>();
         public PokemonCategory Category { get; set; } = new PokemonCategory();
         public PokemonStatistics Statistics { get; set; } = new PokemonStatistics();
         public Ability FirstAbility { get; set; } = new Ability();
