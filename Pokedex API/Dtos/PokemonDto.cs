@@ -16,6 +16,5 @@ namespace Pokedex_API.Dtos
         public Ability FirstAbility { get; set; } = new Ability();
         public Ability? SecondAbility { get; set; }
         public Ability? HiddenAbility { get; set; }
-        public List<int> PossibleGenders { get; set; } = new List<int>();
     }
 }
